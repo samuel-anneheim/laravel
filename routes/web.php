@@ -18,5 +18,8 @@ Route::get('/', function () {
 });
 
 Route::get('/a-propos', function(){
-    return view('about');
+    return view('about', [
+        'name' => 'Samuel',
+        'bibis' => [1, 2, 3, 4],
+    ]);
 });

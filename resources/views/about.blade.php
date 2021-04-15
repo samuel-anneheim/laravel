@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laravel</title>
-</head>
-<body>
-    <h1>Hello Laravel</h1>
+{{-- On va étendre le fichier resources/views/layouts/app.blade.php --}}
+{{-- Laravle compren que layouts.app est layouts/app --}}
+@extends('layouts.app')
+
+{{-- On met le contenu suivant ddans le tield content --}}
+@section('content')
+    <h1>Hello {{$name}}</h1>
+
+    <ul>
+        @foreach ($bibis as $index => $bibi)
+            @dump($loop)
+            <li>{{$bibi}}</li>
+        @endforeach
+    </ul>
 
     <h2>Blade simplifie le PHP</h2>
 
@@ -26,6 +31,4 @@
     <h2>Protection XSS en blade</h2>
     {{'<scripts>alert("toto")</scripts>'}}
     {!! '<h1>Pas de protection XSS</h1>' !!}
-    
-</body>
-</html>
+@endsection
