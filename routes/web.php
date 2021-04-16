@@ -38,3 +38,17 @@ Route::get('/nos-annonces', function () {
         'properties' => $properties,
     ]);
 });
+
+//voir une annonce
+Route::get('/annonce/{id}', function ($id) {
+    $property = DB::table('properties')->where('id', $id)->first();
+            //  DB::table('properties)->find($id)
+
+    if (! $property) {
+        abort(404); // on renvoie une page 404
+    }
+
+    return view('properties/show',[
+        'properties' => $property,
+    ]);
+});
