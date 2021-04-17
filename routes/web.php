@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PropertyController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -30,25 +32,18 @@ route::get('/hello/{name?}', function ($name = 'Samuel') {
 })->where('name', '.{2,}');
 
 //afficher les annonces 
-Route::get('/nos-annonces', function () {
-    // $properties = DB::select('SELECT * FROM properties');
-    // raccourcie
-    $properties = DB::table('properties')->get();
-    return view('properties/index', [
-        'properties' => $properties,
-    ]);
-});
+Route::get('/nos-annonces', [PropertyController::class, 'index']);
+Route::get('/los-annoncas', [PropertyController::class, 'index']);
 
 //voir une annonce
-Route::get('/annonce/{id}', function ($id) {
-    $property = DB::table('properties')->where('id', $id)->first();
-            //  DB::table('properties)->find($id)
+Route::get('/annonce/{id}', [PropertyController::class, 'show'])->whereNumber('id');
 
-    if (! $property) {
-        abort(404); // on renvoie une page 404
-    }
+Route::get('annonce/creer', [PropertyController::class, 'create']);
 
-    return view('properties/show',[
-        'properties' => $property,
-    ]);
-});
+Route::post('/annonce/creer', [PropertyController::class, 'store']);
+
+Route::get('/annonce/editer/{id}', [PropertyController::class, 'edit']);
+
+Route::put('/annonce/editer/{id}', [PropertyController::class, 'update']);
+
+Route::delete('/annonce/{id}', [PropertyController::class, 'destroy']);
