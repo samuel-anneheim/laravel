@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(10)->create();
         \App\Models\User::factory(5)->unverified()->create();
 
-        Property::factory(100)->create([
+        Property::factory(1000)->create([
             'user_id' => User::all()->random(),
         ]);
 
