@@ -36,6 +36,7 @@ Route::get('/nos-annonces', [PropertyController::class, 'index']);
 Route::get('/los-annoncas', [PropertyController::class, 'index']);
 
 //voir une annonce
+Route::get('/annonce/{property}', [PropertyController::class, 'show'])->whereNumber('property');
 Route::get('/annonce/{id}', [PropertyController::class, 'show'])->whereNumber('id');
 
 Route::get('annonce/creer', [PropertyController::class, 'create']);
